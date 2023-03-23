@@ -1,28 +1,30 @@
 <ion-content>
   <div class="flex-center-100">
-    <ion-card color="primary">
+    <ion-card color="primary" style="border-radius: 25px;">
       <ion-card-header>
         <ion-grid>
           <ion-row class="ion-align-items-center ion-justify-content-center">
-            <div class="Logo">
+            <div class="logo">
               <img src="https://i.imgur.com/vFRccMA.png" alt="WhoPays logo" />
             </div>
           </ion-row>
       </ion-grid>
         <ion-row class="ion-align-items-center ion-justify-content-center">
-          <ion-card-subtitle class="shadow-text">Sign In</ion-card-subtitle>
+          <p class="shadow-text-big">Sign In</p> 
         </ion-row>
       </ion-card-header>
       <ion-card-content>
-        <ion-item>
+        <ion-item class="roundedInput">
           <ion-label position="floating">E-mail</ion-label>
-          <ion-input type="email" placeholder="Enter e-mail address"></ion-input>
+          <ion-input type="email" placeholder="Enter e-mail address" class="custom" fill="clear"></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item class="roundedInput">
           <ion-label position="floating">Password</ion-label>
-          <ion-input type="password" placeholder="Enter your password"></ion-input>
+          <ion-input type="password" placeholder="Enter your password" class="custom"></ion-input>
         </ion-item>
-        <ion-button color="dark" fill="clear">Forgot Email or Password</ion-button>            
+        <ion-button color="dark" fill="clear" size="full" shape="round">I FORGOT MY EMAIL OR PASSWORD</ion-button>
+        <ion-button color="dark" size="full" shape="round">Login</ion-button>
+        <ion-button color="dark" fill="clear" size="full" shape="round">Register</ion-button>
       </ion-card-content>
     </ion-card>
   </div>
