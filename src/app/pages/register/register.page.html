@@ -10,10 +10,14 @@
           </ion-row>
       </ion-grid>
         <ion-row class="ion-align-items-center ion-justify-content-center">
-          <p class="shadow-text-big">Sign In</p> 
+          <p class="shadow-text-big">Sign Up</p> 
         </ion-row>
       </ion-card-header>
       <ion-card-content>
+        <ion-item class="roundedInput">
+          <ion-label position="floating">Full Name</ion-label>
+          <ion-input type="email" placeholder="Enter e-mail address" class="custom" fill="clear"></ion-input>
+        </ion-item>
         <ion-item class="roundedInput">
           <ion-label position="floating">E-mail</ion-label>
           <ion-input type="email" placeholder="Enter e-mail address" class="custom" fill="clear"></ion-input>
@@ -22,9 +26,12 @@
           <ion-label position="floating">Password</ion-label>
           <ion-input type="password" placeholder="Enter your password" class="custom"></ion-input>
         </ion-item>
-        <ion-button color="dark" fill="clear" size="full" shape="round">I FORGOT MY EMAIL OR PASSWORD</ion-button>
-        <ion-button color="dark" size="full" shape="round">Login</ion-button>
-        <ion-button color="dark" fill="clear" size="full" shape="round">Sign Up</ion-button>
+        <ion-item class="roundedInput">
+          <ion-label position="floating">Confirm Password</ion-label>
+          <ion-input type="password" placeholder="Confirm Password" class="custom"></ion-input>
+        </ion-item>
+        <ion-button color="dark" fill="clear" size="full" shape="round">I ALREADY HAVE AN ACCOUNT</ion-button>
+        <ion-button color="dark" size="full" shape="round">Sign Up</ion-button>
       </ion-card-content>
     </ion-card>
   </div>
