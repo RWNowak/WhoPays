@@ -25,6 +25,14 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+ion-content{
+    --ion-background-color:#1e1e1e;
+}
+
+ion-avatar.user{
+    margin-left: 5px;
+}
+
 .flex-center-100{
     display: flex;
     justify-content: center;
@@ -46,7 +54,9 @@ ion-input.custom{
     --padding-end: 0px !important;
     --padding-start: 0px !important;
     --padding-top: 0px !important;
+    height: 20px
 }
+
 .logo{
     margin-bottom: 10px;
 }
@@ -55,5 +65,5 @@ ion-input.custom{
 }
 .roundedInput {
     --border-radius: 15px;
-    margin-bottom:2px; 
+    margin-bottom:2px;
    }
