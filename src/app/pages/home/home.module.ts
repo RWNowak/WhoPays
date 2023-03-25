@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { HomePageRoutingModule } from './home-routing.module';
 import { PageOneComponent } from './page-one.component';
 import { PageTwoComponent } from './page-two.component';
-import { PageThreeComponent } from './page-three.component';
 import { HomePage } from './home.page';
 
 @NgModule({
@@ -18,6 +17,6 @@ import { HomePage } from './home.page';
     HomePageRoutingModule,
     IonicModule.forRoot({})
   ],
-  declarations: [HomePage, PageOneComponent, PageTwoComponent, PageThreeComponent]
+  declarations: [HomePage, PageOneComponent, PageTwoComponent]
 })
 export class HomePageModule {}
