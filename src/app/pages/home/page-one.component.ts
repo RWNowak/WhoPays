@@ -5,12 +5,12 @@ import { PageTwoComponent } from './page-two.component';
 @Component({
   selector: 'app-page-one',
   template: `
-  <ion-content class="ion-padding">
+  <ion-content class="ion-padding" color="">
     <ion-grid>
       <ion-row class="ion-align-items-center">
         <ion-col>
           <div style="display: flex; justify-content: right">
-            <ion-button [disabled]="true">Pays</ion-button>
+            <ion-button style="box-shadow: 0 2px 6px 0 rgba(255, 255, 255, 0.5)" [disabled]="true">Pays</ion-button>
           </div>
         </ion-col>
         <ion-col>
