@@ -12,9 +12,34 @@
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title>Username</ion-title>
+      <ion-title>WhoPays</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-card>
+    <ion-card-header>
+      <div class="flex-center-100">
+        <div class="flex-left-100">
+          <ion-avatar class="user">
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+          <ion-card-title>Username</ion-card-title>
+        </div>
+        <div class="flex-right-100">
+            <img src="https://i.imgur.com/gKB4i2P.png" />
+        </div>
+    </div>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="flex-center-100">
+        <div class="flex-left-100W">
+        You owe X and are owed Y
+        </div>
+      <div class="flex-right-100W">
+        Total Balance is X
+      </div>
+    </div>
+    </ion-card-content>
+  </ion-card>
   <ion-content class="ion-padding" color="secondary">
     <ion-nav [root]="component" animated="true"></ion-nav>
   </ion-content>
