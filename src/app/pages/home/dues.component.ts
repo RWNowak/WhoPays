@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PageOneComponent } from './page-one.component'
+import { PaysComponent } from './pays.component'
 
 @Component({
   selector: 'app-page-two',
@@ -21,9 +21,20 @@ import { PageOneComponent } from './page-one.component'
         </ion-col>
       </ion-row>
     </ion-grid>
+    <ion-grid>
+      <ion-row class="ion-align-items-left">
+        <app-user-card-dues></app-user-card-dues>
+      </ion-row>
+      <ion-row class="ion-align-items-left">
+        <app-user-card-dues></app-user-card-dues>
+      </ion-row>
+      <ion-row class="ion-align-items-left">
+        <app-user-card-dues></app-user-card-dues>
+      </ion-row>
+    </ion-grid>
   </ion-content> 
 `,
 })
-export class PageTwoComponent {
-  component = PageOneComponent;
+export class DuesComponent {
+  component = PaysComponent;
 }

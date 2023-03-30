@@ -5,9 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import { PageOneComponent } from './page-one.component';
-import { PageTwoComponent } from './page-two.component';
+import { PaysComponent } from './pays.component';
+import { DuesComponent } from './dues.component';
 import { HomePage } from './home.page';
+import { UserCardPaysComponent } from 'src/app/components/user-card-pays/user-card-pays.component';
+import { UserCardDuesComponent } from 'src/app/components/user-card-dues/user-card-dues.component';
 
 @NgModule({
   imports: [
@@ -17,6 +19,6 @@ import { HomePage } from './home.page';
     HomePageRoutingModule,
     IonicModule.forRoot({})
   ],
-  declarations: [HomePage, PageOneComponent, PageTwoComponent]
+  declarations: [HomePage, PaysComponent, DuesComponent, UserCardPaysComponent, UserCardDuesComponent]
 })
 export class HomePageModule {}
