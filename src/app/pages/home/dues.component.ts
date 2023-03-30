@@ -10,13 +10,13 @@ import { PaysComponent } from './pays.component'
         <ion-col>
           <div style="display: flex; justify-content: right">
           <ion-nav-link router-direction="forward" [component]="component">
-              <ion-button>Pays</ion-button>
+              <ion-button class="mainActive">Pays</ion-button>
             </ion-nav-link>
           </div>
       </ion-col>
         <ion-col>
             <div style="display: flex; justify-content: left">
-              <ion-button style="box-shadow: 0 2px 6px 0 rgba(255, 255, 255, 0.5)" [disabled]="true">Dues</ion-button>
+              <ion-button class="mainNonActive" [disabled]="true">Dues</ion-button>
             </div>
         </ion-col>
       </ion-row>

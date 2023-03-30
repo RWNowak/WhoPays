@@ -9,13 +9,13 @@ import { DuesComponent} from './dues.component';
       <ion-row class="ion-align-items-center">
         <ion-col>
           <div style="display: flex; justify-content: right">
-            <ion-button style="box-shadow: 0 2px 6px 0 rgba(255, 255, 255, 0.5)" [disabled]="true">Pays</ion-button>
+            <ion-button class="mainNonActive" [disabled]="true">Pays</ion-button>
           </div>
         </ion-col>
         <ion-col>
             <div style="display: flex; justify-content: left">
             <ion-nav-link router-direction="forward" [component]="component">
-              <ion-button>Dues</ion-button>
+              <ion-button class="mainActive">Dues</ion-button>
             </ion-nav-link>
             </div>
         </ion-col>

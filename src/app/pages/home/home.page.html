@@ -1,10 +1,41 @@
 <ion-menu contentId="main-content" color="secondary">
   <ion-header>
     <ion-toolbar>
-      <ion-title>Menu Content</ion-title>
+      <ion-title>WhoPays</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content class="ion-padding">This is the menu content.</ion-content>
+  <ion-content class="ion-padding"> <!-- side-menu content -->
+    <ion-grid>
+      <ion-row>
+        <ion-col size = "8">
+          <ion-button expand="full" class="defaultMenu" fill="clear">
+            Profile
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size = "8">
+          <ion-button expand="full" class="defaultMenu" fill="clear">
+            Friends
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size = "8">
+          <ion-button expand="full" class="defaultMenu" fill="clear">
+            Events
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size = "8">
+          <ion-button expand="full" class="defaultMenu" fill="clear">
+            Items
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
 </ion-menu>
 <div class="ion-page" id="main-content">
   <ion-header>
@@ -25,7 +56,9 @@
           <ion-card-title>Username</ion-card-title>
         </div>
         <div class="flex-right-100">
+            <div class="flex-center">
             Total Balance
+            </div>
             <div class="imageMoney">
               <img src="https://i.imgur.com/gKB4i2P.png" />
             </div>
