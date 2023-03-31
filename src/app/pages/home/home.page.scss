@@ -1,3 +1,15 @@
 .imageMoney{
     margin-left: 10px;
 }
+ion-fab.rightMargin {
+    -webkit-margin-start: 20px;
+}
+ion-menu::part(backdrop) {
+  background-color: rgba(235,68,90, 0.5);
+}
+
+ion-menu::part(container) {
+  border-radius: 0 20px 20px 0;
+
+  box-shadow: 4px 0px 16px rgba(255, 255, 255, 0.18);
+}

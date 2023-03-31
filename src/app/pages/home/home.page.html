@@ -1,7 +1,9 @@
-<ion-menu contentId="main-content" color="secondary">
+<ion-menu contentId="main-content">
   <ion-header>
-    <ion-toolbar>
-      <ion-title>WhoPays</ion-title>
+    <ion-toolbar color="primary">
+      <div class="flex-center">
+        <ion-title>WhoPays</ion-title>
+      </div>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding"> <!-- side-menu content -->
@@ -75,21 +77,21 @@
   </ion-card>
   <ion-content class="ion-padding" color="secondary">
     <ion-nav [root]="component" animated="true"></ion-nav>
-    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-      <ion-fab-button>
-        <ion-icon name="add"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-list side="top">
+      <ion-fab class ="rightMargin" slot="fixed" vertical="bottom" horizontal="center">
         <ion-fab-button>
-          Add Event...
+          <ion-icon name="add"></ion-icon>
         </ion-fab-button>
-        <ion-fab-button>
-          <ion-icon name="color-palette"></ion-icon>
-        </ion-fab-button>
-        <ion-fab-button>
-          <ion-icon name="globe"></ion-icon>
-        </ion-fab-button>
-      </ion-fab-list>
-    </ion-fab>
+        <ion-fab-list side="top">
+          <ion-button>
+            Add Event...
+          </ion-button>
+          <ion-button>
+            Add Event...
+          </ion-button>
+          <ion-button>
+            Add Event...
+          </ion-button>
+        </ion-fab-list>
+      </ion-fab>
   </ion-content>
 </div>
