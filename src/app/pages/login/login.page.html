@@ -19,14 +19,15 @@
             <ion-label position="floating">E-mail</ion-label>
             <ion-input type="email" formControlName="email" placeholder="Enter e-mail address" class="custom" fill="clear"></ion-input>
           </ion-item>
-          <ion-label color="dark" *ngIf="form?.get('email')?.touched && form.get('email')?.errors?.['email']"><strong>E-mail is invalid</strong></ion-label>
-          <ion-label color="dark" *ngIf="form?.get('email')?.touched && form.get('email')?.errors?.['required']"><strong>E-mail is mandatory</strong></ion-label>
+          <app-error-message [field]="form.get('email')" error="required" message="Email is required"></app-error-message>
+          <app-error-message [field]="form.get('email')" error="email" message="Email is invalid"></app-error-message>
+          <!-- error for email being wrong -->
           <ion-item class="roundedInput">
             <ion-label position="floating">Password</ion-label>
             <ion-input type="password" formControlName="password" placeholder="Enter your password" class="custom"></ion-input>
           </ion-item>
-          <ion-label color="dark" *ngIf="form?.get('password')?.touched && form.get('password')?.errors?.['password']"><strong>Password is invalid</strong></ion-label>
-          <ion-label color="dark" *ngIf="form?.get('password')?.touched && form.get('password')?.errors?.['required']"><strong>Password is mandatory</strong></ion-label>
+          <app-error-message [field]="form.get('password')" error="required" message="Password is required"></app-error-message>
+          <app-error-message [field]="form.get('password')" error="password" message="Password is invalid"></app-error-message>
           <ion-button color="dark" fill="clear" size="full" shape="round">I FORGOT MY EMAIL OR PASSWORD</ion-button>
           <ion-button color="dark" size="full" shape="round" [disabled]="!form.valid" (click)="login()">Sign In</ion-button>
           <ion-button (click)="register()" color="dark" fill="clear" size="full" shape="round">Sign Up</ion-button>
