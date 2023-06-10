@@ -1,0 +1,11 @@
+.backdrop{
+    z-index: 9999;
+    position: fixed;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.5);
+
+    ion-spinner {
+        flex: 1;
+        align-self: center;
+    }
+}

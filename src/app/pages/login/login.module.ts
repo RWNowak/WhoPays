@@ -15,7 +15,7 @@ import { ErrorMessageComponent } from 'src/app/components/error-message/error-me
     FormsModule,
     IonicModule,
     LoginPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [LoginPage, ErrorMessageComponent]
 })
