@@ -1,7 +1,7 @@
 <ion-content>
   <div class="flex-center-100">
-    <form [formGroup]="form">
-      <ion-card color="primary" style="border-radius: 25px;">
+    <form [formGroup]="form"> <!-- </form>(ngSumbit)="LoginUser(form.value)" -->
+      <ion-card class="formWidth"color="primary" style="border-radius: 25px;">
         <ion-card-header>
           <ion-grid>
             <ion-row class="ion-align-items-center ion-justify-content-center">
@@ -28,7 +28,6 @@
           </ion-item>
           <app-error-message [field]="form.get('password')" error="required" message="Password is required"></app-error-message>
           <app-error-message [field]="form.get('password')" error="password" message="Password is invalid"></app-error-message>
-          <ion-button color="dark" fill="clear" size="full" shape="round">I FORGOT MY EMAIL OR PASSWORD</ion-button>
           <ion-button color="dark" size="full" shape="round" [disabled]="!form.valid" (click)="login()">Sign In</ion-button>
           <ion-button (click)="register()" color="dark" fill="clear" size="full" shape="round">Sign Up</ion-button>
         </ion-card-content>

@@ -1,38 +1,46 @@
 <ion-content>
   <div class="flex-center-100">
-    <ion-card color="primary" style="border-radius: 25px;">
-      <ion-card-header>
-        <ion-grid>
+    <form [formGroup]="registerForm">
+      <ion-card color="primary" style="border-radius: 25px;">
+        <ion-card-header>
+          <ion-grid>
+            <ion-row class="ion-align-items-center ion-justify-content-center">
+              <div class="logo">
+                <img src="https://i.imgur.com/vFRccMA.png" alt="WhoPays logo" />
+              </div>
+            </ion-row>
+        </ion-grid>
           <ion-row class="ion-align-items-center ion-justify-content-center">
-            <div class="logo">
-              <img src="https://i.imgur.com/vFRccMA.png" alt="WhoPays logo" />
-            </div>
+            <p class="shadow-text-big">Sign Up</p> 
           </ion-row>
-      </ion-grid>
-        <ion-row class="ion-align-items-center ion-justify-content-center">
-          <p class="shadow-text-big">Sign Up</p> 
-        </ion-row>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-item class="roundedInput">
-          <ion-label position="floating">Full Name</ion-label>
-          <ion-input type="email" placeholder="Enter e-mail address" class="custom" fill="clear"></ion-input>
-        </ion-item>
-        <ion-item class="roundedInput">
-          <ion-label position="floating">E-mail</ion-label>
-          <ion-input type="email" placeholder="Enter e-mail address" class="custom" fill="clear"></ion-input>
-        </ion-item>
-        <ion-item class="roundedInput">
-          <ion-label position="floating">Password</ion-label>
-          <ion-input type="password" placeholder="Enter your password" class="custom"></ion-input>
-        </ion-item>
-        <ion-item class="roundedInput">
-          <ion-label position="floating">Confirm Password</ion-label>
-          <ion-input type="password" placeholder="Confirm Password" class="custom"></ion-input>
-        </ion-item>
-        <ion-button [routerLink]="['/login']" color="dark" fill="clear" size="full" shape="round">I ALREADY HAVE AN ACCOUNT</ion-button>
-        <ion-button color="dark" size="full" shape="round" (click)="register()">Sign Up</ion-button>
-      </ion-card-content>
-    </ion-card>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item class="roundedInput">
+            <ion-label position="floating">Full Name</ion-label>
+            <ion-input type="text" formControlName="name" placeholder="Enter your name" class="custom" fill="clear"></ion-input>
+          </ion-item>
+          <app-error-message [field]="registerForm.get('name')" error="required" message="Name is required"></app-error-message>
+          <ion-item class="roundedInput">
+            <ion-label position="floating">E-mail</ion-label>
+            <ion-input type="email" formControlName="email" placeholder="Enter e-mail address" class="custom" fill="clear"></ion-input>
+          </ion-item>
+          <app-error-message [field]="registerForm.get('email')" error="required" message="Email is required"></app-error-message>
+          <app-error-message [field]="registerForm.get('email')" error="email" message="Email is invalid"></app-error-message>
+          <ion-item class="roundedInput">
+            <ion-label position="floating">Password</ion-label>
+            <ion-input type="password" formControlName="password" placeholder="Enter your password" class="custom"></ion-input>
+          </ion-item>
+          <app-error-message [field]="registerForm.get('password')" error="required" message="Password is required"></app-error-message>
+            <app-error-message [field]="registerForm.get('password')" error="password" message="Password is invalid"></app-error-message>
+          <ion-item class="roundedInput">
+            <ion-label position="floating">Confirm Password</ion-label>
+            <ion-input type="password" formControlName="confirmPassword"placeholder="Confirm Password" class="custom"></ion-input>
+          </ion-item>
+          <app-error-message *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.errors?.['mismatch']" message="Passwords do not match"></app-error-message>
+          <ion-button [routerLink]="['/login']" color="dark" fill="clear" size="full" shape="round">I ALREADY HAVE AN ACCOUNT</ion-button>
+          <ion-button color="dark" size="full" shape="round" [disabled]="!registerForm.valid" (click)="register()">Sign Up</ion-button>
+        </ion-card-content>
+      </ion-card>
+    </form>
   </div>
 </ion-content>

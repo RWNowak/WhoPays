@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { Router } from '@angular/router';
+import { RegisterPageForm } from './register.page.form';
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -7,9 +9,12 @@ import { Router } from '@angular/router';
 })
 export class RegisterPage implements OnInit {
 
-  constructor(private router: Router) { }
+  registerForm!: FormGroup;
+
+  constructor(private router: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.registerForm = new RegisterPageForm(this.formBuilder).createForm();
   }
 
   register(){

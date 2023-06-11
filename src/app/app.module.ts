@@ -8,12 +8,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { LoadingComponent } from './components/loading/loading.component';
+import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, LoadingComponent],
   imports: [BrowserModule, 
     IonicModule.forRoot(), 
-    AppRoutingModule, 
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule, 
     StoreDevtoolsModule.instrument({maxAge: 25})],
   providers: [{ 
     provide: 
