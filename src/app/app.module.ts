@@ -9,6 +9,10 @@ import { AppComponent } from './app.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { LoadingComponent } from './components/loading/loading.component';
 import { ReactiveFormsModule, FormsModule} from '@angular/forms';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { firebaseConfig } from 'src/environments/environment';
 
 @NgModule({
   declarations: [AppComponent, LoadingComponent],
@@ -16,7 +20,9 @@ import { ReactiveFormsModule, FormsModule} from '@angular/forms';
     IonicModule.forRoot(), 
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule, 
+    FormsModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule, 
     StoreDevtoolsModule.instrument({maxAge: 25})],
   providers: [{ 
     provide: 
