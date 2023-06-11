@@ -16,13 +16,11 @@ export class RegisterPageForm {
           const password = passwordControl.value;
           const confirmPassword = confirmPasswordControl.value;
       
-          if (password === confirmPassword) {
+          if (password == confirmPassword) {
             return null; // Passwords match, return null
           } else {
-            confirmPasswordControl.setErrors({ mismatch: true }); // Set error on confirmPassword control
-            return null;
+            return confirmPasswordControl.setErrors({ mismatch: true }); // Set error on confirmPassword control
           }
-
         } else {
             return null; // Return null if the controls are not found
         }
@@ -31,7 +29,7 @@ export class RegisterPageForm {
     createForm() : FormGroup{
         return this.formBuilder.group({
             email: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required]],
+            password: ['', [Validators.required, Validators.minLength(8)]],
             name: ['', [Validators.required]],
             confirmPassword: ['', Validators.required]
         }, { validator: this.passwordMatchValidator 

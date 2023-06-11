@@ -31,12 +31,13 @@
             <ion-input type="password" formControlName="password" placeholder="Enter your password" class="custom"></ion-input>
           </ion-item>
           <app-error-message [field]="registerForm.get('password')" error="required" message="Password is required"></app-error-message>
-            <app-error-message [field]="registerForm.get('password')" error="password" message="Password is invalid"></app-error-message>
+          <app-error-message [field]="registerForm.get('password')" error="password" message="Password is invalid"></app-error-message>
+          <app-error-message [field]="registerForm.get('password')" error="minlength" message="Password must have 8 characters or more"></app-error-message>
           <ion-item class="roundedInput">
             <ion-label position="floating">Confirm Password</ion-label>
             <ion-input type="password" formControlName="confirmPassword"placeholder="Confirm Password" class="custom"></ion-input>
           </ion-item>
-          <app-error-message *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.errors?.['mismatch']" message="Passwords do not match"></app-error-message>
+          <app-error-message [field]="registerForm.get('confirmPassword')" error="mismatch" message="Passwords do not match"></app-error-message>
           <ion-button [routerLink]="['/login']" color="dark" fill="clear" size="full" shape="round">I ALREADY HAVE AN ACCOUNT</ion-button>
           <ion-button color="dark" size="full" shape="round" [disabled]="!registerForm.valid" (click)="register()">Sign Up</ion-button>
         </ion-card-content>
