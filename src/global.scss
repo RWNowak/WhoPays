@@ -126,3 +126,13 @@ ion-button.mainNonActive{
 .formWidth{
     width: 100%;
 }
+ion-alert.custom-alert {
+    --backdrop-opacity: 0;
+  }
+.ion-alert.custom-alert{
+    display: flex;
+    align-items:flex-end;
+    justify-content: left;
+    margin-bottom: 20px;
+    margin-left:20px;
+}

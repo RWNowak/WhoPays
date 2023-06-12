@@ -33,12 +33,18 @@ export class LoginPage implements OnInit {
 
   async ShowAlert(message: string) {
     const alert = await this.alertCtrl.create({
-      header: 'Alert',
       message: message,
-      buttons: ['OK']
+      cssClass: 'ion-alert custom-alert',
+      backdropDismiss: true,
+      translucent: true,
     });
 
     await alert.present();
+
+    setTimeout(() => {
+      alert.dismiss();
+    }, 500);
+
   }
 
   LoginUser(value: { email: string, password: string }) {
@@ -52,14 +58,16 @@ export class LoginPage implements OnInit {
             username: resp.user.displayName,
             uid: resp.user.uid
           });
+
+          this.ShowAlert('Logged in successfully!')
   
           const userProfile = this.firestore.collection('profile').doc(resp.user.uid);
   
           userProfile.get().subscribe(result => {
             if (result.exists) {
-              this.nav.navigateForward(['home']).then(() => {
-                this.ShowAlert('Logged in successfully!');
-              });
+              // this.nav.navigateForward(['home']).then(() => {
+              //   this.ShowAlert('Logged in successfully!');
+              // });
             } else {
               this.firestore.doc(`profile/${this.authservice.getUID()}`).set({
                 name: resp.user.displayName,
@@ -67,11 +75,18 @@ export class LoginPage implements OnInit {
               });
             }
           });
+          this.nav.navigateRoot(['/home']);
+        } else {
+
+          this.ShowAlert('Wrong email or password')
         }
+      })
+      .catch(err => {
+        console.log(err);
+        this.ShowAlert('Wrong email or password');
       });
-    } catch (err) {
-      console.log(err);
-      this.ShowAlert('Wrong email or password');
-    }
+  } catch (err) {
+    console.log(err);
+    this.ShowAlert('Wrong email or password');
   }
-}
+}}

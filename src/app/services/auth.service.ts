@@ -9,7 +9,6 @@ export interface UserPro{
   uid: string;
 }
 
-
 @Injectable({
   providedIn: 'root'
 })
