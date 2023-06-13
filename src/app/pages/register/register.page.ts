@@ -53,7 +53,7 @@ export class RegisterPage implements OnInit {
   async errorLoading(message: any){
     const loading = await this.alertCtrl.create({
       header:"Error Registering",
-      message:message,
+      message:"The chosen e-mail is already in use",
       buttons:[{
         text:'ok',
         handler: ()=>{

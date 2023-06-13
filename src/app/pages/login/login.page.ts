@@ -47,46 +47,42 @@ export class LoginPage implements OnInit {
 
   }
 
-  LoginUser(value: { email: string, password: string }) {
-    console.log("Logged in");
-    this.errorMessage = '';
-    try {
-      this.authservice.loginFireauth(value).then(resp => {
-        console.log(resp);
+  LoginUser(value: {email: string, password: string} ) {
+    try{
+      this.authservice.loginFireauth(value).then(resp =>{
         if (resp.user) {
+          console.log(resp)
+          console.log(resp.user)
           this.authservice.setUser({
-            username: resp.user.displayName,
-            uid: resp.user.uid
-          });
+            name: resp.user.displayName,
+            uid: resp.user.uid,
+            email: resp.user.email
+          })
 
-          this.ShowAlert('Logged in successfully!')
-  
           const userProfile = this.firestore.collection('profile').doc(resp.user.uid);
-  
-          userProfile.get().subscribe(result => {
+
+          userProfile.get().subscribe(result =>{
+            
             if (result.exists) {
-              // this.nav.navigateForward(['home']).then(() => {
-              //   this.ShowAlert('Logged in successfully!');
-              // });
+              this.nav.navigateForward(['home']);
             } else {
               this.firestore.doc(`profile/${this.authservice.getUID()}`).set({
                 name: resp.user.displayName,
                 email: resp.user.email
-              });
+              })
             }
-          });
-          this.nav.navigateRoot(['/home']);
-        } else {
+          })
 
-          this.ShowAlert('Wrong email or password')
+           this.ShowAlert('Logged in successfully!');
+           this.nav.navigateRoot(['/home']);
+
         }
-      })
-      .catch(err => {
+      }).catch(err => {
         console.log(err);
         this.ShowAlert('Wrong email or password');
       });
-  } catch (err) {
-    console.log(err);
-    this.ShowAlert('Wrong email or password');
+    } catch (err) {
+      console.log(err);
+    }
   }
-}}
+}

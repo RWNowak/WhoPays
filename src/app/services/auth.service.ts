@@ -5,8 +5,9 @@ import 'firebase/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 export interface UserPro{
-  username: string;
+  name: string;
   uid: string;
+  email: string
 }
 
 @Injectable({
@@ -14,7 +15,7 @@ export interface UserPro{
 })
 export class AuthService {
 
-  private user: UserPro = { username: '', uid: '' };
+  private user: UserPro = { name: '', uid: '', email: ''};
 
   constructor(public auth: AngularFireAuth){ }
 
@@ -34,6 +35,18 @@ export class AuthService {
 
   getUID(): string{
     return this.user.uid;
+  }
+
+  getUserData(uid: string): Promise<any> {
+    const userProfile = firebase.firestore().collection('profile').doc(uid);
+    return userProfile.get().then((doc) => {
+      if (doc.exists) {
+        const userData = doc.data();
+        return userData;
+      } else {
+        throw new Error('User data not found');
+      }
+    });
   }
 
   userRegistration(value: {email: string; password: string}) {
