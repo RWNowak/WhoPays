@@ -56,7 +56,8 @@ export class LoginPage implements OnInit {
           this.authservice.setUser({
             name: resp.user.displayName,
             uid: resp.user.uid,
-            email: resp.user.email
+            email: resp.user.email,
+            photoUrl: resp.user.photoUrl
           })
 
           const userProfile = this.firestore.collection('profile').doc(resp.user.uid);

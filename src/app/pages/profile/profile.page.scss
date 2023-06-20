@@ -1,7 +1,55 @@
-#belowToolbar{
-    margin-top:60px
+.card {
+    margin: 60px auto 0;    
 }
-#healthyMargin{
-    margin-top:20px;
-    margin-left:20px;
+
+.card .header {
+    height: 200px;
+}
+
+.card .header .avatar {
+    width: 160px;
+    height: 160px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.card .header .avatar img {
+    display: block;
+    border-radius: 50%;
+    position: absolute;
+    bottom: calc(-1*(80px + 4px));
+    border: 8px solid #403D58;
+    background-color: #FC7753;
+}
+
+.card-body {
+    background-color: #FC7753;
+    padding: 30px;
+    height: calc(100vh - (200px + 56px));
+    overflow: hidden;
+}
+
+.card-body .user-meta {
+    padding-top: 40px;
+}
+
+.card-body .user-meta .playername {
+    font-size: 24px;
+    font-weight: 600;
+    color: #000000;
+}
+
+.card-body .user-meta .country {
+    font-size: 90%;
+    color: #000000;
+    text-transform: uppercase;
+    margin: 0 auto;
+}
+
+#belowToolbar{
+    margin: 60px auto 0;    
+}
+
+.image-button{
+    width:50px; 
 }

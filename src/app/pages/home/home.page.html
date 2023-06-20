@@ -53,9 +53,9 @@
       <div class="flex-center-100">
         <div class="flex-left-100">
           <ion-avatar class="user">
-            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            <img [src]="user.photoUrl ? user.photoUrl : 'https://ionicframework.com/docs/img/demos/avatar.svg'" alt="">
           </ion-avatar>
-          <ion-card-title>Username</ion-card-title>
+          <ion-card-title>{{user.name}}</ion-card-title>
         </div>
         <div class="flex-right-100">
             <div class="flex-center">

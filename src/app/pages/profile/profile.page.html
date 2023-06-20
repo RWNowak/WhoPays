@@ -50,16 +50,22 @@
     </ion-header>
   </div>
   <div class="ion-page" id="belowToolbar">
-    <div class="container" id="healthyMargin">
-        <ion-avatar class="user">
-            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-        </ion-avatar>
-        <div class="profile-details">
-            <ion-label>Name:</ion-label>
-            <ion-label>{{ user.name }}</ion-label>
-            <ion-label>Email:</ion-label>
-            <ion-label>{{ user.email }}</ion-label>
+    <div class="container">
+      <div class="card">
+        <div class="header">
+          <div class="avatar">
+            <img [src]="user.photoUrl ? user.photoUrl : 'https://ionicframework.com/docs/img/demos/avatar.svg'" alt="">
           </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="user-meta ion-text-center">
+          <h3 class="playername">{{user.name}}</h3>
+          <h5 class="country">{{user.email}}</h5>
+          <ion-button>
+            <input type="file" (change)="uploadImageToFirebase($event)" id="file-input" accept="image/png, image/jpg">
+          </ion-button>
+      </div>
     </div>
   </div>
   

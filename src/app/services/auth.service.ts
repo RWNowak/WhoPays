@@ -5,9 +5,10 @@ import 'firebase/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 export interface UserPro{
-  name: string;
-  uid: string;
+  name: string
+  uid: string
   email: string
+  photoUrl: string
 }
 
 @Injectable({
@@ -15,7 +16,7 @@ export interface UserPro{
 })
 export class AuthService {
 
-  private user: UserPro = { name: '', uid: '', email: ''};
+  private user: UserPro = { name: '', uid: '', email: '', photoUrl:''};
 
   constructor(public auth: AngularFireAuth){ }
 
