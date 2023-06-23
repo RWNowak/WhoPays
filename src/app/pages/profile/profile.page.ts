@@ -4,7 +4,6 @@ import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { Observable, of } from 'rxjs';
-import { finalize } from 'rxjs/operators'
 import { AuthService, UserPro } from 'src/app/services/auth.service';
 export interface imageData{
   fileName: string;

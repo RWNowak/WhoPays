@@ -74,15 +74,10 @@
   </ion-card>
   <ion-content class="ion-padding" color="secondary">
     <ion-nav [root]="component" animated="true"></ion-nav>
-      <ion-fab class ="rightMargin" slot="fixed" vertical="bottom" horizontal="center">
-        <ion-fab-button>
+      <ion-fab slot="fixed" vertical="bottom" horizontal="center">
+        <ion-fab-button (click)="openModal()">
           <ion-icon name="add"></ion-icon>
         </ion-fab-button>
-        <ion-fab-list side="top">
-          <ion-button>
-            Add Event...
-          </ion-button>
-        </ion-fab-list>
       </ion-fab>
   </ion-content>
 </div>

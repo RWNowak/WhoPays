@@ -5,6 +5,7 @@ import { LoginPageForm } from './login.page.form';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { NavController, AlertController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -59,21 +60,6 @@ export class LoginPage implements OnInit {
             email: resp.user.email,
             photoUrl: resp.user.photoUrl
           })
-
-          const userProfile = this.firestore.collection('profile').doc(resp.user.uid);
-
-          userProfile.get().subscribe(result =>{
-            
-            if (result.exists) {
-              this.nav.navigateForward(['home']);
-            } else {
-              this.firestore.doc(`profile/${this.authservice.getUID()}`).set({
-                name: resp.user.displayName,
-                email: resp.user.email
-              })
-            }
-          })
-
            this.ShowAlert('Logged in successfully!');
            this.nav.navigateRoot(['/home']);
 

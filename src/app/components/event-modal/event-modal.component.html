@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Add Event
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()" [disabled]="!eventForm.valid">Confirm</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <form [formGroup]="eventForm">
+    <ion-item>
+      <ion-label position="floating">Event Name</ion-label>
+      <ion-input formControlName="eventName" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Your Contribution</ion-label>
+      <ion-input formControlName="yourContribution" type="number" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Selected Guests</ion-label>
+      <ion-select formControlName="selectedGuest" (ionChange)="onGuestChange()">
+        <ion-select-option *ngFor="let guest of partyGuests" [value]="guest.id">
+          {{ guest.name }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngFor="let guest of selectedGuests">
+      <ion-label>{{ guest.name }}'s Contribution</ion-label>
+      <ion-input
+        type="number"
+        [formControl]="guest.formControl"
+      ></ion-input>
+    </ion-item>
+  </form>
+</ion-content>
+
+
