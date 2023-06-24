@@ -25,7 +25,7 @@ import { HomePage } from './home.page';
       <ion-grid>
       <ng-container *ngFor="let guest of homePage.guests.slice(3, 6)">
         <ion-row class="ion-align-items-left">
-          <app-user-card-pays [guest]="guest"></app-user-card-pays>
+          <app-user-card-dues [guest]="guest"></app-user-card-dues>
         </ion-row>
       </ng-container>
       </ion-grid>
