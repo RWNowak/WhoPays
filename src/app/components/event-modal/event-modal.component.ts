@@ -83,40 +83,73 @@ export class EventModalComponent implements OnInit {
   async confirm() {
     const eventNameControl = this.eventForm.get('eventName');
     const yourContributionControl = this.eventForm.get('yourContribution');
-  
+    
     if (eventNameControl && yourContributionControl && eventNameControl.valid && yourContributionControl.valid) {
       this.eventName = eventNameControl.value;
       this.yourContribution = yourContributionControl.value;
-  
+      
+      const totalContribution = this.selectedGuests.reduce((sum, guest) => sum + Number(guest.formControl.value), Number(this.yourContribution));
+      console.log(totalContribution);
+      const averageContribution = parseFloat((totalContribution / (this.selectedGuests.length + 1)).toFixed(2));
+      console.log(averageContribution);
+
+      let Payments: any[] = [];
+
+      if (parseFloat(this.yourContribution) < averageContribution) {
+        Payments = this.selectedGuests.map(guest => {
+          const difference = guest.formControl.value - averageContribution;
+          if (difference < 0) {
+            return {
+              name: guest.name,
+              type: 'due',
+              amount: parseFloat((Math.abs(difference) / this.getParticipantsBelowAverage()).toFixed(2)),
+            };
+          } else {
+            return null;
+          }
+        }).filter(payment => payment !== null);
+      } else {
+        Payments = this.selectedGuests.map(guest => {
+          const difference = guest.formControl.value - averageContribution;
+          if (difference > 0) {
+            return {
+              name: guest.name,
+              type: 'pay',
+              amount: parseFloat((difference / this.getParticipantsAboveAverage()).toFixed(2)),
+            };
+          } else {
+            return null;
+          }
+        }).filter(payment => payment !== null);
+      }
+      
       const eventData = {
         eventName: this.eventName,
-        yourContribution: this.yourContribution,
-        selectedGuests: this.selectedGuests.map((guest) => ({
-          name: guest.name,
-          contribution: guest.formControl.value || 0,
-        })),
+        totalContribution: totalContribution,
+        Payments: Payments,
       };
-
+      
       console.log('eventData:', eventData);
-
+      
       try {
         const userUID = this.userUID;
         const userProfile = this.firestore.collection('profile').doc(userUID);
         const eventName = this.eventName.toLowerCase().replace(/ /g, '_');
-
+        
         // Create a new subcollection under the profile/uid document
         await userProfile.collection('events').doc(eventName).set(eventData);
-
+        
         const folderName = eventName;
         const folderRef = this.storage.ref(`profile/${userUID}/${folderName}`);
         const folderData = {
-          yourContribution: this.yourContribution,
-          selectedGuests: this.selectedGuests.map((guest) => ({
+          yourContribution: Number(this.yourContribution),
+          selectedGuests: this.selectedGuests.map(guest => ({
             name: guest.name,
-            contribution: guest.formControl.value,
+            pays: Number(guest.formControl.value) || 0,
+            dues: 0,
           })),
         };
-
+      
         await folderRef.putString(JSON.stringify(folderData));
         this.modalCtrl.dismiss(eventData, 'confirm');
         this.ShowAlert('Event Added!');
@@ -126,4 +159,14 @@ export class EventModalComponent implements OnInit {
       }
     }
   }
-}
+  
+  getParticipantsAboveAverage(): number {
+    const averageContribution = (this.selectedGuests.reduce((total, guest) => total + (Number(guest.formControl.value) || 0), Number(this.yourContribution)) / (this.selectedGuests.length + 1)); // +1 for yourself
+    return this.selectedGuests.reduce((count, guest) => (guest.formControl.value || 0) > averageContribution ? count + 1 : count, 0);
+  }
+  
+  getParticipantsBelowAverage(): number {
+    const averageContribution = (this.selectedGuests.reduce((total, guest) => total + (Number(guest.formControl.value) || 0), Number(this.yourContribution)) / (this.selectedGuests.length + 1)); // +1 for yourself
+    return this.selectedGuests.reduce((count, guest) => (guest.formControl.value || 0) < averageContribution ? count + 1 : count, 0);
+  }
+}  
