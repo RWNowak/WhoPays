@@ -95,13 +95,14 @@ export class EventModalComponent implements OnInit {
 
       let Payments: any[] = [];
 
+      //PAY MEANS WE PAY SOMEONE, DUE MEANS THEY PAY US
       if (parseFloat(this.yourContribution) < averageContribution) {
         Payments = this.selectedGuests.map(guest => {
           const difference = guest.formControl.value - averageContribution;
           if (difference < 0) {
             return {
               name: guest.name,
-              type: 'due',
+              type: 'pay',
               amount: parseFloat((Math.abs(difference) / this.getParticipantsBelowAverage()).toFixed(2)),
             };
           } else {
@@ -114,7 +115,7 @@ export class EventModalComponent implements OnInit {
           if (difference > 0) {
             return {
               name: guest.name,
-              type: 'pay',
+              type: 'due',
               amount: parseFloat((difference / this.getParticipantsAboveAverage()).toFixed(2)),
             };
           } else {
