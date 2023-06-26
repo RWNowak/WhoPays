@@ -96,14 +96,14 @@ export class EventModalComponent implements OnInit {
       let Payments: any[] = [];
 
       //PAY MEANS WE PAY SOMEONE, DUE MEANS THEY PAY US
-      if (parseFloat(this.yourContribution) < averageContribution) {
+      if (parseFloat(this.yourContribution) >= averageContribution) {
         Payments = this.selectedGuests.map(guest => {
           const difference = guest.formControl.value - averageContribution;
           if (difference < 0) {
             return {
               name: guest.name,
-              type: 'pay',
-              amount: parseFloat((Math.abs(difference) / this.getParticipantsBelowAverage()).toFixed(2)),
+              type: 'due',
+              amount: parseFloat((Math.abs(difference) / this.getParticipantsAboveAverage()).toFixed(2)),
             };
           } else {
             return null;
@@ -115,8 +115,8 @@ export class EventModalComponent implements OnInit {
           if (difference > 0) {
             return {
               name: guest.name,
-              type: 'due',
-              amount: parseFloat((difference / this.getParticipantsAboveAverage()).toFixed(2)),
+              type: 'pay',
+              amount: parseFloat((difference / this.getParticipantsBelowAverage()).toFixed(2)),
             };
           } else {
             return null;
@@ -163,11 +163,48 @@ export class EventModalComponent implements OnInit {
   
   getParticipantsAboveAverage(): number {
     const averageContribution = (this.selectedGuests.reduce((total, guest) => total + (Number(guest.formControl.value) || 0), Number(this.yourContribution)) / (this.selectedGuests.length + 1)); // +1 for yourself
-    return this.selectedGuests.reduce((count, guest) => (guest.formControl.value || 0) > averageContribution ? count + 1 : count, 0);
+    console.log('averageContribution:', averageContribution); // Add this line
+  
+    const aboveAverageCount = this.selectedGuests.reduce((count, guest) => {
+      console.log('guest.formControl.value:', guest.formControl.value); // Add this line
+      console.log('averageContribution:', averageContribution); // Add this line
+      console.log('(guest.formControl.value || 0) > averageContribution:', (guest.formControl.value || 0) > averageContribution); // Add this line
+  
+      return (guest.formControl.value || 0) > averageContribution ? count + 1 : count;
+    }, 0);
+  
+    console.log('aboveAverageCount:', aboveAverageCount); // Add this line
+  
+    // Adjust aboveAverageCount if your contribution is above the average
+    if (Number(this.yourContribution) > averageContribution) {
+      console.log('My Contribution', this.yourContribution);
+      return aboveAverageCount + 1;
+    } else {
+      return aboveAverageCount;
+    }
   }
+  
   
   getParticipantsBelowAverage(): number {
     const averageContribution = (this.selectedGuests.reduce((total, guest) => total + (Number(guest.formControl.value) || 0), Number(this.yourContribution)) / (this.selectedGuests.length + 1)); // +1 for yourself
-    return this.selectedGuests.reduce((count, guest) => (guest.formControl.value || 0) < averageContribution ? count + 1 : count, 0);
+    console.log('averageContribution:', averageContribution); // Add this line
+  
+    const belowAverageCount = this.selectedGuests.reduce((count, guest) => {
+      console.log('guest.formControl.value:', guest.formControl.value); // Add this line
+      console.log('averageContribution:', averageContribution); // Add this line
+      console.log('(guest.formControl.value || 0) < averageContribution:', (guest.formControl.value || 0) < averageContribution); // Add this line
+  
+      return (guest.formControl.value || 0) < averageContribution ? count + 1 : count;
+    }, 0);
+  
+    console.log('belowAverageCount:', belowAverageCount); // Add this line
+  
+    // Adjust belowAverageCount if your contribution is below the average
+    if (Number(this.yourContribution) < averageContribution) {
+      console.log('My Contribution', this.yourContribution);
+      return belowAverageCount + 1;
+    } else {
+      return belowAverageCount;
+    }
   }
 }  

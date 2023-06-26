@@ -24,12 +24,12 @@ export class HomePage implements OnInit {
 
   component = PaysComponent;
   guests = [
+    { name: 'Andrew', id: 'andrew', avatar: 'gs://whopays-c78dd.appspot.com/guestsUploads/andrew.png' },
+    { name: 'John', id: 'john', avatar: 'gs://whopays-c78dd.appspot.com/guestsUploads/john.png' },
+    { name: 'Mike', id: 'mike', avatar: 'gs://whopays-c78dd.appspot.com/guestsUploads/mike.png' },
     { name: 'Rob', id: 'rob', avatar: 'gs://whopays-c78dd.appspot.com/guestsUploads/rob.png' },
     { name: 'Sally', id: 'sally', avatar: 'gs://whopays-c78dd.appspot.com/guestsUploads/sally.png' },
-    { name: 'Andrew', id: 'andrew', avatar: 'gs://whopays-c78dd.appspot.com/guestsUploads/andrew.png' },
-    { name: 'Mike', id: 'mike', avatar: 'gs://whopays-c78dd.appspot.com/guestsUploads/mike.png' },
     { name: 'Sarah', id: 'sarah', avatar: 'gs://whopays-c78dd.appspot.com/guestsUploads/sarah.png' },
-    { name: 'John', id: 'john', avatar: 'gs://whopays-c78dd.appspot.com/guestsUploads/john.png' },
   ];
 
   constructor(
@@ -40,6 +40,19 @@ export class HomePage implements OnInit {
   ) {}
 
   ngOnInit() {
+    // Call the separate function to execute the code
+    this.refreshData();
+
+    // Add an event listener to the button
+    const refreshButton = document.getElementById('refreshButton');
+    if (refreshButton) {
+    refreshButton.addEventListener('click', () => {
+      // Call the refreshData function
+      this.refreshData();
+    });
+  }}
+
+  refreshData() {
     const uid = this.authService.getUID();
     this.authService
       .getUserData(uid)
@@ -60,7 +73,7 @@ export class HomePage implements OnInit {
     guestsCollection
       .get()
       .then((querySnapshot) => {
-        console.log(querySnapshot)
+        console.log(querySnapshot);
         if (querySnapshot.empty) {
           // 'guests' collection doesn't exist, create it and add the initial guest documents
           this.createInitialGuests(guestsCollection);
@@ -68,7 +81,7 @@ export class HomePage implements OnInit {
           // 'guests' collection exists, calculate TotalPays and TotalDues for each guest
           querySnapshot.forEach((doc) => {
             const guest = doc.data();
-            console.log(guestsCollection.doc(doc.id))
+            console.log(guestsCollection.doc(doc.id));
             this.calculateTotalAmount(doc.id) // Pass the guest object to the calculateTotalAmount function
               .then((totalAmounts) => {
                 guestsCollection
@@ -95,15 +108,15 @@ export class HomePage implements OnInit {
   calculateTotalAmount(guestName: string): Promise<TotalAmounts> {
     let totalPay = 0;
     let totalDue = 0;
-  
+
     const uid = this.authService.getUID();
-  
+
     // Access the Firebase Firestore collection
     const db = firebase.firestore();
-  
+
     // Access the events collection for the user
     const eventsRef = db.collection('profile').doc(uid).collection('events');
-  
+
     // Iterate through all events and calculate total pay and total due for the guest
     return eventsRef
       .get()
@@ -111,15 +124,15 @@ export class HomePage implements OnInit {
         querySnapshot.forEach((doc) => {
           const event = doc.data();
           console.log('Event:', event); // Log the event data to check its structure
-  
+
           if (event['Payments']) {
             console.log('Event Payments:', event['Payments']); // Log the event payments to check their structure
-  
+
             const payments = event['Payments'];
             for (const payment of payments) {
               console.log('Payment:', payment); // Log each payment to check its structure
               console.log('Payment Name:', payment.name); // Log the payment name for further inspection
-  
+
               if (payment.name === guestName) {
                 if (payment.type === 'pay') {
                   totalPay += payment.amount;
@@ -130,21 +143,19 @@ export class HomePage implements OnInit {
             }
           }
         });
-  
-        const totalAmounts: TotalAmounts = {
-          totalPay: totalPay,
-          totalDue: totalDue,
+
+        // Return the calculated total amounts
+        return {
+          totalPay,
+          totalDue,
         };
-  
-        return totalAmounts;
       })
       .catch((error) => {
-        console.error('Error getting events:', error);
+        console.error('Error getting events collection:', error);
         throw error;
       });
   }
-  
-  
+
   createInitialGuests(guestsCollection: firebase.firestore.CollectionReference) {
     const guests = [
       { name: 'Rob' },

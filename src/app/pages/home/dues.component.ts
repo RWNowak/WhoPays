@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { PaysComponent } from './pays.component';
 import { HomePage } from './home.page';
+import { DebtServiceService } from 'src/app/services/debt-service.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-page-two',
@@ -23,9 +25,9 @@ import { HomePage } from './home.page';
         </ion-row>
       </ion-grid>
       <ion-grid>
-      <ng-container *ngFor="let guest of homePage.guests.slice(3, 6)">
+      <ng-container *ngFor="let card of duesCards">
         <ion-row class="ion-align-items-left">
-          <app-user-card-dues [guest]="guest"></app-user-card-dues>
+          <app-user-card-dues [guest]="card.guest" [amount]="card.amount"></app-user-card-dues>
         </ion-row>
       </ng-container>
       </ion-grid>
@@ -35,8 +37,22 @@ import { HomePage } from './home.page';
 
 export class DuesComponent {
   component = PaysComponent;
+  duesCards: { guest: { name: string; id: string; avatar: string; }; amount: number; }[] = [];
   
-  constructor(public homePage: HomePage) {}
+  constructor(public homePage: HomePage, private debtService: DebtServiceService, private authService: AuthService) {}
 
-  ngOnInit() {}
+  async ngOnInit() {
+    const guests = this.homePage.guests;
+    const UID = this.authService.getUID();
+
+    for (const guest of guests) {
+      const { amount, isDebt } = await this.debtService.calculateOwedAmount(UID, guest.name);
+      
+      if (!isDebt && amount !== 0) {
+        this.duesCards.push({ guest, amount });
+      }
+    }
+
+    console.log(this.duesCards);
+  }
 }

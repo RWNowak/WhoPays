@@ -1,9 +1,61 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>events</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-</ion-content>
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <div class="flex-center">
+        <ion-title>WhoPays</ion-title>
+      </div>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding"> <!-- side-menu content -->
+    <ion-grid>
+      <ion-row>
+        <ion-col size = "8">
+          <ion-button [routerLink]="['/home']" expand="full" class="defaultMenu" fill="clear">
+            Home
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size = "8">
+          <ion-button [routerLink]="['/profile']" expand="full" class="defaultMenu" fill="clear">
+            Profile
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size = "8">
+          <ion-button [routerLink]="['/events']" expand="full" class="defaultMenu" fill="clear">
+            Events
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size = "8">
+          <ion-button [routerLink]="['/login']" expand="full" class="defaultMenu" fill="clear">
+            Logout
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+</ion-menu>
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>WhoPays</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</div>
+<div class="container-flex">
+  <ion-card *ngFor="let event of eventsList">
+    <ion-card-header>
+      <ion-card-title>{{ event.eventName }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Total Contribution: {{ event.totalContribution }}
+    </ion-card-content>
+  </ion-card>
+</div>

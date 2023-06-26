@@ -18,18 +18,52 @@ export class AuthService {
 
   private user: UserPro = { name: '', uid: '', email: '', photoUrl:''};
 
-  constructor(public auth: AngularFireAuth){ }
+  constructor(public auth: AngularFireAuth){ 
+    this.initializeApp();
+  }
 
-  loginFireauth(value: { email: string; password: string }) {
-    return new Promise<any>((resolve, reject) => {
-      firebase.auth().signInWithEmailAndPassword(value.email, value.password)
-        .then(
-          res => resolve(res),
-          error => reject(error)
-        );
+  initializeApp() {
+    this.auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+      .then(() => {
+        // Authentication persistence enabled
+        // You can now listen for authentication state changes
+        this.listenForAuthStateChanges();
+      })
+      .catch((error) => {
+        // Error occurred while setting persistence
+        console.error('Error setting persistence:', error);
+      });
+  }
+
+  listenForAuthStateChanges() {
+    this.auth.onAuthStateChanged((user) => {
+      if (user) {
+        // User is logged in
+        // You can perform necessary actions here
+      } else {
+        // User is logged out
+        // You can handle the logout state here
+      }
     });
   }
 
+  loginFireauth(value: { email: string; password: string }) {
+    return new Promise<any>((resolve, reject) => {
+      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+        .then(() => {
+          firebase.auth().signInWithEmailAndPassword(value.email, value.password)
+            .then(
+              res => resolve(res),
+              error => reject(error)
+            );
+        })
+        .catch((error) => {
+          console.error('Error setting persistence:', error);
+          reject(error);
+        });
+    });
+  }
+  
   setUser(user: UserPro){
     return this.user = user;
   }
