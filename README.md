@@ -50,9 +50,6 @@ To run the WhoPays app on your local machine, follow these steps:
 | REQ_003        | Medium     | User       | Allow users to register and log in to the app                     |
 | REQ_004        | Medium     | User       | Display user profile information                                  |
 | REQ_005        | Low        | User       | Allow users to upload and update their avatars                    |
-| REQ_006        | Low        | Notification | Send notifications for expense updates and reminders            |
-| REQ_007        | Low        | Security   | Implement user authentication and access control                  |
-| REQ_008        | Low        | Backup     | Periodically backup user data to prevent data loss                |
 
 ## Project Structure
 The project structure follows the standard Angular and Ionic project structure:
